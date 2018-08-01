@@ -34,18 +34,18 @@ def frame(scoreboard):
 def total_score(scoreboard):
     total = 0
     for score in range(len(scoreboard)):
-        if scoreboard[score][1] == '/' and not scoreboard[-1]:
+        if scoreboard[score][1] == '/':
             total += 10 + scoreboard[score + 1][0]
-        elif scoreboard[score][1] is scoreboard[-1][1] and scoreboard[-1][1] == '/':
-            while True:
-                roll = input(
-                    '"Third Bowl":\nHow many pins were knocked down?\n>>> ')
-                if roll.isdigit():
-                    total += 10 + int(roll)
-                    break
-                else:
-                    print('Not a valid number')
-            break
+        # elif scoreboard[score][1] is scoreboard[-1][1] and scoreboard[-1][1] == '/':
+        # while True:
+        # roll = input(
+        # '"Third Bowl":\nHow many pins were knocked down?\n>>> ')
+        # if roll.isdigit():
+        # total += 10 + int(roll)
+        # break
+        # else:
+        # print('Not a valid number')
+        # break
         else:
             total += sum(scoreboard[score])
     print(total)
