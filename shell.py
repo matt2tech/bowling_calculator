@@ -22,8 +22,7 @@ def frame(scoreboard):
                         print('Not a valid number')
                 break
             else:
-                score.append(ball_1)
-                score.append(0)
+                score.append('X')
                 break
         else:
             print('Not a valid number')
@@ -34,8 +33,10 @@ def frame(scoreboard):
 def total_score(scoreboard):
     total = 0
     for score in range(len(scoreboard)):
-        if scoreboard[score][1] == '/':
+        if scoreboard[score][-1] == '/':
             total += 10 + scoreboard[score + 1][0]
+        elif scoreboard[score][0] == 'X':
+            total += 10 + scoreboard[score + 1][0] + scoreboard[score + 1][-1]
         # elif scoreboard[score][1] is scoreboard[-1][1] and scoreboard[-1][1] == '/':
         # while True:
         # roll = input(
@@ -56,7 +57,7 @@ def main():
     # name = input('What is the player\'s name?\n>>> ')
     frame(scoreboard)
     frame(scoreboard)
-    # frame(scoreboard)
+    frame(scoreboard)
     # frame(scoreboard)
     # frame(scoreboard)
     # frame(scoreboard)
