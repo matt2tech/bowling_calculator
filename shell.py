@@ -39,7 +39,16 @@ def total_score(scoreboard):
             else:
                 total += 10 + scoreboard[score + 1][0]
         elif scoreboard[score][0] == 'X':
-            total += 10 + scoreboard[score + 1][0] + scoreboard[score + 1][-1]
+            if scoreboard[score + 1][0] == 'X' and scoreboard[score +
+                                                              2][0] == 'X':
+                total += 30
+            elif scoreboard[score + 1][-1] == '/':
+                total += 20
+            elif scoreboard[score + 1][0] == 'X':
+                total += 20 + scoreboard[score + 2][0]
+            else:
+                total += 10 + scoreboard[score + 1][0] + scoreboard[score +
+                                                                    1][-1]
         # elif scoreboard[score][1] is scoreboard[-1][1] and scoreboard[-1][1] == '/':
         # while True:
         # roll = input(
