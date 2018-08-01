@@ -34,7 +34,10 @@ def total_score(scoreboard):
     total = 0
     for score in range(len(scoreboard)):
         if scoreboard[score][-1] == '/':
-            total += 10 + scoreboard[score + 1][0]
+            if scoreboard[score + 1][0] == 'X':
+                total += 20
+            else:
+                total += 10 + scoreboard[score + 1][0]
         elif scoreboard[score][0] == 'X':
             total += 10 + scoreboard[score + 1][0] + scoreboard[score + 1][-1]
         # elif scoreboard[score][1] is scoreboard[-1][1] and scoreboard[-1][1] == '/':
