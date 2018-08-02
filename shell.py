@@ -40,7 +40,7 @@ def total_score(scoreboard, name):
     total = 0
     for score in range(len(scoreboard)):
         if '/' in scoreboard[score]:
-            ball_1 = scoreboard[score][0]
+            ball_1 = scoreboard[score][-2]
             ball_2 = 10 - ball_1
             total += ball_1 + ball_2
             if score + 1 < len(scoreboard):
@@ -52,6 +52,8 @@ def total_score(scoreboard, name):
             else:
                 next_ball = scoreboard[score][2]
                 if next_ball == 'X':
+                    total += 10
+                elif next_ball == '/':
                     total += 10
                 else:
                     total += next_ball
