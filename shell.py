@@ -61,8 +61,24 @@ def total_score(scoreboard):
                             total += 10
                         else:
                             total += third_ball
+                    else:
+                        third_ball = scoreboard[score + 1][1]
+                        if third_ball == 'X':
+                            total += 10
+                        else:
+                            total += third_ball
                 else:
                     third_ball = scoreboard[score + 1][1]
+                    if third_ball == '/':
+                        total += 10
+                    else:
+                        total += next_ball + third_ball
+            else:
+                next_ball = scoreboard[score][1]
+                third_ball = scoreboard[score][2]
+                if next_ball == 'X' and third_ball == 'X':
+                    total += 20
+                else:
                     if third_ball == '/':
                         total += 10
                     else:
@@ -80,13 +96,13 @@ def tenth_frame(scoreboard):
         )
         if ball_1.isdigit():
             ball_1 = int(ball_1)
-            if ball_1 == 10:
-                while True:
-                    ball_2 = input(
-                        '\n"Second Bowl"\nHow many pins were knocked down?\n>>> '
-                    )
-                    if ball_2.isdigit():
-                        ball_2 = int(ball_2)
+            while True:
+                ball_2 = input(
+                    '\n"Second Bowl"\nHow many pins were knocked down?\n>>> ')
+                if ball_2.isdigit() and int(ball_2) <= 10 - ball_1:
+                    ball_2 = int(ball_2)
+                    if ball_1 + ball_2 == 10:
+                        ball_2 = '/'
                         while True:
                             ball_3 = input(
                                 '\n"Third Bowl"\nHow many pins were knocked down?\n>>> '
@@ -102,24 +118,8 @@ def tenth_frame(scoreboard):
                                 print('Not a valid number')
                         break
                     else:
-                        print('Not a valid number')
-            else:
-                while True:
-                    ball_2 = input(
-                        '\n"Second Bowl"\nHow many pins were knocked down?\n>>> '
-                    )
-                    if ball_2.isdigit() and int(ball_2) <= 10 - ball_1:
-                        if int(ball_2) + ball_1 == 10:
-                            ball_2 = '/'
-                            score = [ball_1, ball_2]
-                            scoreboard.append(score)
-                            break
-                        else:
-                            score = [ball_1, int(ball_2)]
-                            scoreboard.append(score)
-                            break
-                    else:
-                        print('Not a valid number')
+                        score = [ball_1, ball_2]
+                        scoreboard.append(score)
                 else:
                     print('Not a valid number')
         else:
@@ -129,7 +129,7 @@ def tenth_frame(scoreboard):
 def main():
     scoreboard = []
     # name = input('What is the player\'s name?\n>>> ')
-    # scoreboard = frame()
+    scoreboard = frame()
     tenth_frame(scoreboard)
     total_score(scoreboard)
 
