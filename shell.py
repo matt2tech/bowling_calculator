@@ -36,7 +36,7 @@ def frame():
 
 
 def total_score(scoreboard, name):
-    print('\n{}\n'.format(scoreboard))
+    scoretable(scoreboard)
     total = 0
     for score in range(len(scoreboard)):
         if '/' in scoreboard[score]:
@@ -89,6 +89,8 @@ def total_score(scoreboard, name):
                 third_ball = scoreboard[score][2]
                 if next_ball == 'X' and third_ball == 'X':
                     total += 20
+                elif next_ball == 'X':
+                    total += 10 + third_ball
                 else:
                     if third_ball == '/':
                         total += 10
@@ -193,11 +195,26 @@ def play_again():
             print('Invalid Choice')
 
 
+def scoretable(scoretable):
+    for score in range(len(scoretable) - 1):
+        if len(scoretable[score]) == 2:
+            print('Frame {}: {}|{}'.format(score + 1, scoretable[score][0],
+                                           scoretable[score][1]))
+        else:
+            print('Frame {}:  |{}'.format(score + 1, scoretable[score][0]))
+    if len(scoretable[9]) == 3:
+        print('Frame 10: {}|{}|{}'.format(scoretable[9][0], scoretable[9][1],
+                                          scoretable[9][2]))
+    else:
+        print('Frame 10: {}|{}| '.format(scoretable[9][0], scoretable[9][1]))
+
+
 def main():
     scoreboard = []
     name = input('What is the player\'s name?\n>>> ')
     scoreboard = frame()
     tenth_frame(scoreboard)
+    print('\n')
     total_score(scoreboard, name)
     play_again()
 
