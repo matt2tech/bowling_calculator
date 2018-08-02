@@ -36,11 +36,14 @@ def frame():
 
 
 def total_score(scoreboard, name):
-    print(scoreboard)
+    print('\n{}\n'.format(scoreboard))
     total = 0
     for score in range(len(scoreboard)):
         if '/' in scoreboard[score]:
-            ball_1 = scoreboard[score][-2]
+            for frame in scoreboard:
+                for i in frame:
+                    if i != '/' and i != 'X':
+                        ball_1 = i
             ball_2 = 10 - ball_1
             total += ball_1 + ball_2
             if score + 1 < len(scoreboard):
@@ -178,12 +181,25 @@ def tenth_frame(scoreboard):
             print('Not a valid number')
 
 
+def play_again():
+    game = ''
+    while game != '2':
+        game = input('\nNew Game?\n1 - Yes\n2 - No\n>>> ')
+        if game == '1':
+            main()
+        elif game == '2':
+            exit()
+        else:
+            print('Invalid Choice')
+
+
 def main():
     scoreboard = []
     name = input('What is the player\'s name?\n>>> ')
     scoreboard = frame()
     tenth_frame(scoreboard)
     total_score(scoreboard, name)
+    play_again()
 
 
 if __name__ == '__main__':
