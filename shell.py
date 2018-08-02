@@ -1,7 +1,12 @@
-def frame(scoreboard):
-    while True:
+def frame():
+    scoreboard = []
+    frame = 0
+    while len(scoreboard) != 9:
+        frame += 1
         score = []
-        ball_1 = input('"First Bowl"\nHow many pins were knocked down?\n>>> ')
+        ball_1 = input(
+            'Frame: {}\n"First Bowl"\nHow many pins were knocked down?\n>>> '.
+            format(frame))
         if ball_1.isdigit() and int(ball_1) <= 10:
             ball_1 = int(ball_1)
             if ball_1 < 10:
@@ -14,30 +19,33 @@ def frame(scoreboard):
                         ball_2 = int(ball_2)
                         if ball_2 < 10 - ball_1:
                             score.append(ball_2)
+                            scoreboard.append(score)
                             break
                         elif ball_2 == 10 - ball_1:
                             score.append('/')
+                            scoreboard.append(score)
                             break
                     else:
                         print('Not a valid number')
-                break
             else:
                 score.append('X')
-                break
+                scoreboard.append(score)
         else:
             print('Not a valid number')
-    scoreboard.append(score)
-    print(scoreboard)
+    return scoreboard
 
 
 def total_score(scoreboard):
+    print(scoreboard)
     total = 0
     for score in range(len(scoreboard)):
-        if scoreboard[score][-1] == '/':
-            if scoreboard[score + 1][0] == 'X':
-                total += 20
-            else:
-                total += 10 + scoreboard[score + 1][0]
+        if '/' in scoreboard[score]:
+            ball_1 = scoreboard[score][0]
+            ball_2 = 10 - ball_1
+            total += ball_1 + ball_2
+            if score + 1 < len(scoreboard):
+                next_ball = scoreboard[score + 1][0]
+                total += next_ball
         elif scoreboard[score][0] == 'X':
             if scoreboard[score + 1][0] == 'X' and scoreboard[score +
                                                               2][0] == 'X':
@@ -49,36 +57,22 @@ def total_score(scoreboard):
             else:
                 total += 10 + scoreboard[score + 1][0] + scoreboard[score +
                                                                     1][-1]
-        # elif scoreboard[score][1] is scoreboard[-1][1] and scoreboard[-1][1] == '/':
-        # while True:
-        # roll = input(
-        # '"Third Bowl":\nHow many pins were knocked down?\n>>> ')
-        # if roll.isdigit():
-        # total += 10 + int(roll)
-        # break
-        # else:
-        # print('Not a valid number')
-        # break
         else:
             total += sum(scoreboard[score])
     print(total)
 
 
 def main():
-    scoreboard = []
     # name = input('What is the player\'s name?\n>>> ')
-    frame(scoreboard)
-    frame(scoreboard)
-    frame(scoreboard)
-    # frame(scoreboard)
-    # frame(scoreboard)
-    # frame(scoreboard)
-    # frame(scoreboard)
-    # frame(scoreboard)
-    # frame(scoreboard)
-    # frame(scoreboard)
+    scoreboard = frame()
     total_score(scoreboard)
 
 
 if __name__ == '__main__':
     main()
+
+    # if scoreboard[score][-1] == '/':
+    #     if scoreboard[score + 1][0] == 'X':
+    #         total += 20
+    #     else:
+    #         total += 10 + scoreboard[score + 1][0]
