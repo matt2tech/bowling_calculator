@@ -4,7 +4,7 @@ def frame():
     while len(scoreboard) != 9:
         score = []
         ball_1 = input(
-            'Frame: {}\n"First Bowl"\nHow many pins were knocked down?\n>>> '.
+            '\nFrame: {}\n"First Bowl"\nHow many pins were knocked down?\n>>> '.
             format(frame))
         if ball_1.isdigit() and int(ball_1) <= 10:
             ball_1 = int(ball_1)
@@ -13,7 +13,7 @@ def frame():
                 score.append(ball_1)
                 while True:
                     ball_2 = input(
-                        '"Second Bowl"\nHow many pins were knocked down?\n>>> '
+                        '"\nSecond Bowl"\nHow many pins were knocked down?\n>>> '
                     )
                     if ball_2.isdigit() and int(ball_2) <= 10 - ball_1:
                         ball_2 = int(ball_2)
@@ -67,24 +67,70 @@ def total_score(scoreboard):
                         total += 10
                     else:
                         total += next_ball + third_ball
-        #     if scoreboard[score + 1][0] == 'X' and scoreboard[score +
-        #                                                       2][0] == 'X':
-        #         total += 30
-        #     elif scoreboard[score + 1][-1] == '/':
-        #         total += 20
-        #     elif scoreboard[score + 1][0] == 'X':
-        #         total += 20 + scoreboard[score + 2][0]
-        #     else:
-        #         total += 10 + scoreboard[score + 1][0] + scoreboard[score +
-        #                                                             1][-1]
         else:
             total += sum(scoreboard[score])
     print(total)
 
 
+def tenth_frame(scoreboard):
+    score = []
+    while len(score) <= 0:
+        ball_1 = input(
+            '\nFrame: 10\n"First Bowl"\nHow many pins were knocked down?\n>>> '
+        )
+        if ball_1.isdigit():
+            ball_1 = int(ball_1)
+            if ball_1 == 10:
+                while True:
+                    ball_2 = input(
+                        '\n"Second Bowl"\nHow many pins were knocked down?\n>>> '
+                    )
+                    if ball_2.isdigit():
+                        ball_2 = int(ball_2)
+                        while True:
+                            ball_3 = input(
+                                '\n"Third Bowl"\nHow many pins were knocked down?\n>>> '
+                            )
+                            if ball_3.isdigit():
+                                score = [ball_1, ball_2, int(ball_3)]
+                                for i in range(len(score)):
+                                    if score[i] == 10:
+                                        score[i] = 'X'
+                                scoreboard.append(score)
+                                break
+                            else:
+                                print('Not a valid number')
+                        break
+                    else:
+                        print('Not a valid number')
+            else:
+                while True:
+                    ball_2 = input(
+                        '\n"Second Bowl"\nHow many pins were knocked down?\n>>> '
+                    )
+                    if ball_2.isdigit() and int(ball_2) <= 10 - ball_1:
+                        if int(ball_2) + ball_1 == 10:
+                            ball_2 = '/'
+                            score = [ball_1, ball_2]
+                            scoreboard.append(score)
+                            break
+                        else:
+                            score = [ball_1, int(ball_2)]
+                            scoreboard.append(score)
+                            break
+                    else:
+                        print('Not a valid number')
+                else:
+                    print('Not a valid number')
+        else:
+            print('Not a valid number')
+
+
 def main():
+    scoreboard = []
     # name = input('What is the player\'s name?\n>>> ')
-    scoreboard = frame()
+    # scoreboard = frame()
+    tenth_frame(scoreboard)
     total_score(scoreboard)
 
 
