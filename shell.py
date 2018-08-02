@@ -1,14 +1,14 @@
 def frame():
     scoreboard = []
-    frame = 0
+    frame = 1
     while len(scoreboard) != 9:
-        frame += 1
         score = []
         ball_1 = input(
             'Frame: {}\n"First Bowl"\nHow many pins were knocked down?\n>>> '.
             format(frame))
         if ball_1.isdigit() and int(ball_1) <= 10:
             ball_1 = int(ball_1)
+            frame += 1
             if ball_1 < 10:
                 score.append(ball_1)
                 while True:
@@ -45,7 +45,10 @@ def total_score(scoreboard):
             total += ball_1 + ball_2
             if score + 1 < len(scoreboard):
                 next_ball = scoreboard[score + 1][0]
-                total += next_ball
+                if next_ball == 'X':
+                    total += 10
+                else:
+                    total += next_ball
         elif scoreboard[score][0] == 'X':
             if scoreboard[score + 1][0] == 'X' and scoreboard[score +
                                                               2][0] == 'X':
