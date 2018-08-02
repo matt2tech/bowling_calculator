@@ -135,6 +135,7 @@ def tenth_frame(scoreboard):
                         else:
                             score = [ball_1, ball_2]
                             scoreboard.append(score)
+                            break
                     else:
                         print('Not a valid number')
             elif ball_1 == 10:
@@ -211,7 +212,7 @@ def scoretable(scoretable):
 
 def main():
     scoreboard = []
-    name = input('What is the player\'s name?\n>>> ')
+    name = input('\nWhat is the player\'s name?\n>>> ')
     scoreboard = frame()
     tenth_frame(scoreboard)
     print('\n')
