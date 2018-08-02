@@ -49,17 +49,34 @@ def total_score(scoreboard):
                     total += 10
                 else:
                     total += next_ball
-        elif scoreboard[score][0] == 'X':
-            if scoreboard[score + 1][0] == 'X' and scoreboard[score +
-                                                              2][0] == 'X':
-                total += 30
-            elif scoreboard[score + 1][-1] == '/':
-                total += 20
-            elif scoreboard[score + 1][0] == 'X':
-                total += 20 + scoreboard[score + 2][0]
-            else:
-                total += 10 + scoreboard[score + 1][0] + scoreboard[score +
-                                                                    1][-1]
+        elif 'X' in scoreboard[score]:
+            total += 10
+            if score + 1 < len(scoreboard):
+                next_ball = scoreboard[score + 1][0]
+                if next_ball == 'X':
+                    total += 10
+                    if score + 2 < len(scoreboard):
+                        third_ball = scoreboard[score + 2][0]
+                        if third_ball == 'X':
+                            total += 10
+                        else:
+                            total += third_ball
+                else:
+                    third_ball = scoreboard[score + 1][1]
+                    if third_ball == '/':
+                        total += 10
+                    else:
+                        total += next_ball + third_ball
+        #     if scoreboard[score + 1][0] == 'X' and scoreboard[score +
+        #                                                       2][0] == 'X':
+        #         total += 30
+        #     elif scoreboard[score + 1][-1] == '/':
+        #         total += 20
+        #     elif scoreboard[score + 1][0] == 'X':
+        #         total += 20 + scoreboard[score + 2][0]
+        #     else:
+        #         total += 10 + scoreboard[score + 1][0] + scoreboard[score +
+        #                                                             1][-1]
         else:
             total += sum(scoreboard[score])
     print(total)
@@ -73,9 +90,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    # if scoreboard[score][-1] == '/':
-    #     if scoreboard[score + 1][0] == 'X':
-    #         total += 20
-    #     else:
-    #         total += 10 + scoreboard[score + 1][0]
